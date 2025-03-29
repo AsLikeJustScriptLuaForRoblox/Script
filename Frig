@@ -1,0 +1,6 @@
+local Library = loadstring(Game:HttpGet("https://raw.githubusercontent.com/bloodball/-back-ups-for-libs/main/wizard"))()
+local Window = Library:NewWindow("Fridgid Dusk (Medal Quest Bagde)")
+local Tab = Window:NewSection("Main")
+Tab:CreateButton("Find Monster (Use in Chapter 2 and part 3 or 2)", function()
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = workspace.Map.Subway.Interaction.Monster.HumanoidRootPart.CFrame
+end)
