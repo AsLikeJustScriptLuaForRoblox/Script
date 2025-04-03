@@ -11,7 +11,7 @@ pcall(function()
         while wait() do
             if getgenv().AutoLine then
                 local args = {
-                    [1] = 2000
+                    [1] = 3000
                 }
 
                 game:GetService("ReplicatedStorage"):WaitForChild("foreverpack"):WaitForChild("Claim"):FireServer(unpack(args))
