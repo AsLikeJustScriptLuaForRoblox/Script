@@ -29,7 +29,7 @@ pcall(function()
 
                 if #game:GetService("Players"):GetPlayers() <= 1 then
                     game:GetService("Players").LocalPlayer:Kick("\nRejoining...")
-                    wait(1)
+                    wait(0.5) 
                     game:GetService("TeleportService"):Teleport(game.PlaceId, game:GetService("Players").LocalPlayer)
                 else
                     game:GetService("TeleportService"):TeleportToPlaceInstance(game.PlaceId, game.JobId, game:GetService("Players").LocalPlayer)
