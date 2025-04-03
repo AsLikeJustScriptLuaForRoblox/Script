@@ -1,4 +1,11 @@
--- Alwi Hub Cracked GUI Lua V.1.2
+-- Alwi Hub Cracked Script V.1.2
+-- getgenv().AutoLine = true
+-- getgenv().Rejoiningtime = 10
+
+if not game.Loaded then
+    game.Loaded:Wait()  
+end
+
 pcall(function()
     spawn(function()
         while wait() do
@@ -15,13 +22,20 @@ pcall(function()
 end)
 
 pcall(function()
-    coroutine.wrap(function()
-        if #game:GetService("Players"):GetPlayers() <= 1 then
-            game:GetService("Players").LocalPlayer:Kick("\nRejoining...")
-            wait(getgenv().Rejoiningtime)
-            game:GetService("TeleportService"):Teleport(game.PlaceId, game:GetService("Players").LocalPlayer)
-        else
-            game:GetService("TeleportService"):TeleportToPlaceInstance(game.PlaceId, game.JobId, game:GetService("Players").LocalPlayer)
-        end
-    end)()
+    spawn(function()
+        coroutine.wrap(function()
+            while true do
+                wait(getgenv().Rejoiningtime)
+
+                if #game:GetService("Players"):GetPlayers() <= 1 then
+                    game:GetService("Players").LocalPlayer:Kick("\nRejoining...")
+                    wait(getgenv().Rejoiningtime)
+                    game:GetService("TeleportService"):Teleport(game.PlaceId, game:GetService("Players").LocalPlayer)
+                else
+                    game:GetService("TeleportService"):TeleportToPlaceInstance(game.PlaceId, game.JobId, game:GetService("Players").LocalPlayer)
+                end
+                wait(1)
+            end
+        end)()
+    end)
 end)
