@@ -1,7 +1,6 @@
 -- Alwi Hub Cracked Script V1.2
-getgenv().AutoLine = getgenv().AutoLine or true
-getgenv().Rejoiningtime = getgenv().Rejoiningtime or 10
-getgenv().Money = getgenv().Money or 10000
+-- getgenv().AutoLine = getgenv().AutoLine or true
+-- getgenv().Rejoiningtime = getgenv().Rejoiningtime or 5
 
 local GameIdList = {
     86989502458300, 101154632072819, 122765496738369,
@@ -29,7 +28,7 @@ spawn(function()
             local CutLineEvent = getrenv().ReplicatedStorage:FindFirstChild("CutLineEvent")
 
             if Claim then
-                Claim:FireServer(getgenv().Money)
+                Claim:FireServer(10000)
             end
             if CutLineEvent then
                 CutLineEvent:FireServer()
