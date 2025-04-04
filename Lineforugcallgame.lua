@@ -1,61 +1,51 @@
--- Alwi Hub Cracked Script V.1.2
--- getgenv().AutoLine = true
--- getgenv().Rejoiningtime = 10
+-- Alwi Hub Cracked Script V1.2
+-- getgenv().AutoLine = getgenv().AutoLine or true
+-- getgenv().Rejoiningtime = getgenv().Rejoiningtime or 10
+-- getgenv().Money = getgenv().Money or 100000  
+
 local GameIdList = {
     86989502458300, 101154632072819, 122765496738369,
     111366523908845, 123423404979327, 122707064710426,
     139903571045314, 103572742165356
 }
 
-local GameIdLine = game.PlaceId  
-local isSupported = false  
-
-for _, id in ipairs(GameIdList) do
-    if GameIdLine == id then
-        if not game.Loaded then
-    game.Loaded:Wait()  
+local placeId = game.PlaceId  
+if not table.find(GameIdList, placeId) then
+    print("Game unsupported")
+    return
 end
-    
-pcall(function()
-    spawn(function()
-        while wait() do
-            if getgenv().AutoLine then
-                local args = {
-                    [1] = 1000000
-                }
 
-                game:GetService("ReplicatedStorage"):WaitForChild("foreverpack"):WaitForChild("Claim"):FireServer(unpack(args))
-                game:GetService("ReplicatedStorage"):WaitForChild("CutLineEvent"):FireServer()
+if not game.Loaded then game.Loaded:Wait() end  
+
+getrenv().ReplicatedStorage = cloneref(game:GetService("ReplicatedStorage")) 
+getrenv().Players = cloneref(game:GetService("Players")) 
+getrenv().TeleportService = cloneref(game:GetService("TeleportService")) 
+
+spawn(function()
+    while task.wait() do
+        if getgenv().AutoLine then
+            local foreverpack = getrenv().ReplicatedStorage:FindFirstChild("foreverpack")
+            local Claim = foreverpack and foreverpack:FindFirstChild("Claim")
+            local CutLineEvent = getrenv().ReplicatedStorage:FindFirstChild("CutLineEvent")
+
+            if Claim then
+                Claim:FireServer(getgenv().Money)
+            end
+            if CutLineEvent then
+                CutLineEvent:FireServer()
             end
         end
-    end)
-end)
-
-pcall(function()
-    spawn(function()
-        coroutine.wrap(function()
-            while true do
-                wait(getgenv().Rejoiningtime)
-
-                if #game:GetService("Players"):GetPlayers() <= 1 then
-                    game:GetService("Players").LocalPlayer:Kick("\nRejoining...")
-                    wait(0.5) 
-                    game:GetService("TeleportService"):Teleport(game.PlaceId, game:GetService("Players").LocalPlayer)
-                else
-                    game:GetService("TeleportService"):TeleportToPlaceInstance(game.PlaceId, game.JobId, game:GetService("Players").LocalPlayer)
-                end
-                wait(0.1) 
-            end
-        end)()
-    end)
-end)
-end
-
-        isSupported = true
-        break
     end
-end
+end)
 
-if not isSupported then
-    print("Game unsupported")
-end
+spawn(function()
+    while task.wait(getgenv().Rejoiningtime) do
+        if #getrenv().Players:GetPlayers() <= 1 then
+            getrenv().Players.LocalPlayer:Kick("\nRejoining...")
+            task.wait(0.5)
+            getrenv().TeleportService:Teleport(placeId, getrenv().Players.LocalPlayer)
+        else
+            getrenv().TeleportService:TeleportToPlaceInstance(placeId, game.JobId, getrenv().Players.LocalPlayer)
+        end
+    end
+end)
