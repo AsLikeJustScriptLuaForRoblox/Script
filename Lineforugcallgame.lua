@@ -1,8 +1,18 @@
 -- Alwi Hub Cracked Script V.1.2
 -- getgenv().AutoLine = true
 -- getgenv().Rejoiningtime = 10
-if game.PlaceId == 86989502458300 or game.PlaceId == 101154632072819 or game.PlaceId == 122765496738369 or game.PlaceId == 111366523908845 or game.PlaceId == 123423404979327 or game.PlaceId == 122707064710426 or game.PlaceId == 139903571045314 or game.PlaceId == 103572742165356 then
-if not game.Loaded then
+local GameIdList = {
+    86989502458300, 101154632072819, 122765496738369,
+    111366523908845, 123423404979327, 122707064710426,
+    139903571045314, 103572742165356
+}
+
+local GameIdLine = game.PlaceId  
+local isSupported = false  
+
+for _, id in ipairs(GameIdList) do
+    if GameIdLine == id then
+        if not game.Loaded then
     game.Loaded:Wait()  
 end
     
@@ -39,4 +49,13 @@ pcall(function()
         end)()
     end)
 end)
+end
+
+        isSupported = true
+        break
+    end
+end
+
+if not isSupported then
+    print("Game unsupported")
 end
