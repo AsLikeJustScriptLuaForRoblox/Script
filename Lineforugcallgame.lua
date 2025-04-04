@@ -28,7 +28,7 @@ spawn(function()
             local CutLineEvent = getrenv().ReplicatedStorage:FindFirstChild("CutLineEvent")
 
             if Claim then
-                Claim:FireServer(10000)
+                Claim:FireServer(100000)
             end
             if CutLineEvent then
                 CutLineEvent:FireServer()
